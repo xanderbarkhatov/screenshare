@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@formkit/auto-animate": "^1.0.0-beta.3",
+    "@heroicons/vue": "^2.0.12",
+    "@nuxtjs/supabase": "^0.2.2",
+    "@nuxtjs/tailwindcss": "^5.3.5",
+    "@types/simple-peer": "^9.11.5",
+    "@types/uuid": "^8.3.4",
+    "@vueuse/nuxt": "^9.3.0",
+    "daisyui": "^2.31.0",
+    "nuxt": "3.0.0-rc.12",
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "simple-peer": "^9.11.1",
+    "uuid": "^9.0.0"
+  }
+}
