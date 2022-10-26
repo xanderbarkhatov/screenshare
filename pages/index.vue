@@ -44,7 +44,6 @@ whenever(stream, (s) => {
 
         peers.set(p.id, peer);
         channels.set(p.id, channel);
-        channel;
       });
     })
     .on("presence", { event: "leave" }, ({ leftPresences }) => {
