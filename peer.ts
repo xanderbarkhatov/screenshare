@@ -1,7 +1,37 @@
 // @ts-ignore
 import SimplePeerMin from "simple-peer/simplepeer.min.js";
-import type { SimplePeer, SignalData, Instance } from "simple-peer";
+import type { SignalData, Instance, SimplePeer, Options } from "simple-peer";
 
-export const Peer = SimplePeerMin as SimplePeer;
+type Peer = Instance;
 
-export { SignalData, Instance as PeerInstance };
+const SimplePeer = SimplePeerMin as SimplePeer;
+
+export { SignalData, Peer };
+
+export function createPeer(options: Options = {}) {
+  return new SimplePeer({
+    ...options,
+    config: {
+      iceServers: [
+        {
+          urls: "stun:openrelay.metered.ca:80",
+        },
+        {
+          urls: "turn:openrelay.metered.ca:80",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls: "turn:openrelay.metered.ca:443",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls: "turn:openrelay.metered.ca:443?transport=tcp",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+      ],
+    },
+  }) as Peer;
+}

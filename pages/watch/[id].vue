@@ -6,7 +6,7 @@ import {
   ArrowsPointingInIcon,
 } from "@heroicons/vue/24/outline";
 import { v4 as uuid } from "uuid";
-import { Peer } from "~~/peer";
+import { createPeer } from "~~/peer";
 
 const route = useRoute();
 const supabase = useSupabaseClient();
@@ -15,7 +15,7 @@ const id = uuid();
 
 supabase.channel(String(route.params.id)).subscribe().track({ id });
 
-const peer = new Peer();
+const peer = createPeer();
 
 const channel = supabase.channel(id).subscribe();
 

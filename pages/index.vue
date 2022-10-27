@@ -2,12 +2,11 @@
 import { useAutoAnimate } from "@formkit/auto-animate/vue";
 import { ClipboardIcon, PlayIcon } from "@heroicons/vue/24/outline";
 import { v4 as uuid } from "uuid";
-import { Peer } from "~~/peer";
-import type { PeerInstance } from "~~/peer";
+import { Peer, createPeer } from "~~/peer";
 import type { RealtimeChannel } from "@supabase/realtime-js";
 
 const id = uuid();
-const peers = new Map<string, PeerInstance>();
+const peers = new Map<string, Peer>();
 const channels = new Map<string, RealtimeChannel>();
 
 const supabase = useSupabaseClient();
@@ -32,7 +31,10 @@ whenever(stream, (s) => {
     .on("presence", { event: "join" }, ({ newPresences }) => {
       newPresences.forEach((p) => {
         const channel = supabase.channel(p.id).subscribe();
-        const peer = new Peer({ initiator: true, stream: s });
+        const peer = createPeer({
+          initiator: true,
+          stream: s,
+        });
 
         peer.on("signal", async (data) => {
           await channel.send({ type: "broadcast", event: "offer", data });
